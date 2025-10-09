@@ -18,6 +18,18 @@ public class ifCetakKRSNoPresensi {
         else {
             System.out.println("Registrasi ditolak. Silakan lunasi UKT terlebih dahulu");
         }
+
+
+        // ============================
+        // Tambahan baris baru:
+        // Transformasi ke bentuk Ternary Operator
+        // ============================
+        String hasil = uktLunas
+            ? "Pembayaran UKT terverifikasi\nSilahkan cetak KRS dan minta tanda tangan DPA"
+            : "Registrasi ditolak. Silakan lunasi UKT terlebih dahulu";
+        
+        System.out.println("\n[Hasil menggunakan Ternary Operator]");
+        System.out.println(hasil);
     
         sc.close();
     }
