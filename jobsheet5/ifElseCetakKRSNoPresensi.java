@@ -1,3 +1,4 @@
+package jobsheet5;
 import java.util.Scanner;
 public class ifElseCetakKRSNoPresensi {
     public static void main(String[] args) {
@@ -30,7 +31,6 @@ public class ifElseCetakKRSNoPresensi {
         }
         
 
-        sc.close();
-    
-    }
-}
+                sc.close();
+            }
+        }
