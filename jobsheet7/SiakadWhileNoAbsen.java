@@ -21,6 +21,11 @@ public class SiakadWhileNoAbsen {
                 System.out.println("Nilai tidak valid. Masukkan lagi nilai yang valid!");
                 continue; // Ulangi iterasi tanpa increment i
             }
+            // Kondisi IF-ELSE IF untuk menampilkan kategori nilai huruf
+            if (nilai > 80 && nilai <= 100) {
+                System.out.println("Nilai mahasiswa ke-" + (i + 1) + " adalah A");
+                System.out.println("Bagus, pertahankan nilainya!");
+            }
             
             // Kondisi IF-ELSE IF untuk menampilkan kategori nilai huruf
             if (nilai > 80 && nilai <= 100) {
