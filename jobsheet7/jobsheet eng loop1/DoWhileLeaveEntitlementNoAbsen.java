@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class DoWhileLeaveEntitlementNoAbsen {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int leaveEntitlement = 12; 
+         int leaveEntitlement = 12; 
         int numLeave;
         String confirmation;
         
@@ -22,6 +22,9 @@ public class DoWhileLeaveEntitlementNoAbsen {
                     System.out.println("You dont have enough leave entitlement. You have " + leaveEntitlement + " day(s) remaining.");
                     // No break - loop continues and user can try again
                 }
+            } else if(confirmation.equalsIgnoreCase("t")) {
+                System.out.println("Program terminated by user.");
+                break;
             }
             
         } while(leaveEntitlement > 0);
