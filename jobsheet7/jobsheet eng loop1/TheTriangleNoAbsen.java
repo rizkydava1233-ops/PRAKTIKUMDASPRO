@@ -4,16 +4,14 @@ public class TheTriangleNoAbsen {
         Scanner sc = new Scanner(System.in);
           int numInput;
         
-        int i = 0;
         String s = "";
         
         System.out.print("Input some number: ");
         numInput = sc.nextInt();
         
-        while (i < numInput) {
+          for (int i = 0; i < numInput; i++) {
             s += " *";
             System.out.println(s);
-            i++;
         }
         sc.close();
     }
