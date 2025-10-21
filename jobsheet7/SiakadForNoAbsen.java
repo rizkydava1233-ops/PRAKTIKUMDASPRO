@@ -5,7 +5,10 @@ public class SiakadForNoAbsen {
         Scanner sc = new Scanner(System.in);
 
         double nilai, tertinggi = 0, terendah = 100;
-        
+
+        //Deklarasi variabel untuk menghitung mahasiswa lulus dan tidak lulus
+        int lulus = 0, tidaklulus = 0;
+
         // Struktur perulangan FOR dengan batas kondisi 10 mahasiswa
         for (int i = 1; i <= 10; i++) {
             // Perintah untuk memasukkan nilai mahasiswa
@@ -21,12 +24,23 @@ public class SiakadForNoAbsen {
             if (nilai < terendah) {
                 terendah = nilai;
             }
+
+             // Kondisi untuk menentukan kelulusan (batas minimal 60)
+             if (nilai >=60) {
+                lulus++;
+             } else {
+                tidaklulus++;
+             }
         }
         
         // Tampilkan nilai tertinggi dan terendah
         System.out.println("\nOutput tertinggi: " + tertinggi);
         System.out.println("Output terendah: " + terendah);
-
+        
+        // Tampilkan jumlah mahasiswa lulus dan tidak lulus
+        System.out.println("\nJumlah mahasiswa lulus: " + lulus);
+        System.out.println("Jumlah mahasiswa tidak lulus: " + tidaklulus);
+        
     sc.close();
     }
 }
