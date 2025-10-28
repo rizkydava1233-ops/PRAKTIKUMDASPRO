@@ -29,6 +29,8 @@ DESKRIPSI
     AKHIR UNTUK
 AKHIR ALGORITMA
 Flowchart Fitur 1
+![alt text](<Untitled diagram-2025-10-28-041237.png>)
+
                     ┌──────────────┐
                     │    MULAI     │
                     └──────┬───────┘
