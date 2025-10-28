@@ -139,6 +139,7 @@ DESKRIPSI
 AKHIR ALGORITMA
 
 Flowchart Fitur 2
+![alt text](<Untitled diagram-2025-10-28-041237.png>)
                     ┌──────────────┐
                     │    MULAI     │
                     └──────┬───────┘
@@ -251,6 +252,7 @@ DESKRIPSI
     AKHIR UNTUK
 AKHIR ALGORITMA
 Flowchart Fitur 3
+![alt text](<Untitled diagram-2025-10-28-041237.png>)
                     ┌──────────────┐
                     │    MULAI     │
                     └──────┬───────┘
@@ -386,6 +388,7 @@ DESKRIPSI
     AKHIR UNTUK
 AKHIR ALGORITMA
 Flowchart Fitur 4
+![alt text](<Untitled diagram-2025-10-28-041237.png>)
                     ┌──────────────┐
                     │    MULAI     │
                     └──────┬───────┘
@@ -508,6 +511,7 @@ DESKRIPSI
     AKHIR UNTUK
 AKHIR ALGORITMA
 Flowchart Fitur 5
+![alt text](<Untitled diagram-2025-10-28-041237.png>)
                     ┌──────────────┐
                     │    MULAI     │
                     └──────┬───────┘
