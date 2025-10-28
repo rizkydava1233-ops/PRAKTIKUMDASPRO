@@ -3,7 +3,7 @@ package jobsheet8;
 import java.util.Scanner;
 public class NestedLoopStudentID {
      public static void main(String[] args) {
-        // Declaration for Scanner named scanner and 2D array named temps
+                // Declaration for Scanner named scanner and 2D array named temps
         Scanner scanner = new Scanner(System.in);
         double[][] temps = new double[5][7];
         
@@ -17,18 +17,21 @@ public class NestedLoopStudentID {
             System.out.println();
         }
         
-        // Display temperature data
-        System.out.println("\n=== Temperature Data Display ===\n");
-        for (int i = 0; i < temps.length; i++) {
-            System.out.println("City: " + i);
-            for (int j = 0; j < temps[0].length; j++) {
-                System.out.print(temps[i][j] + " ");
+        // Display temperature data using foreach
+        System.out.println("\n=== Temperature Data Display (Using Foreach) ===\n");
+        int cityIndex = 0;
+        for (double[] city : temps) {
+            System.out.println("City: " + cityIndex);
+            for (double temp : city) {
+                System.out.print(temp + " ");
             }
             System.out.println();
+            cityIndex++;
         }
         
         // Close Scanner
         scanner.close();
     }
+
     
 }
