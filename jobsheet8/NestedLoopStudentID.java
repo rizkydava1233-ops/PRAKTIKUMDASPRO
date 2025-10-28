@@ -28,6 +28,18 @@ public class NestedLoopStudentID {
             System.out.println();
             cityIndex++;
         }
+
+        // Display average temperature for each city
+        System.out.println("\n=== Average Temperature Per City ===\n");
+        for (int i = 0; i < temps.length; i++) {
+            double sum = 0;
+            for (int j = 0; j < temps[i].length; j++) {
+                sum += temps[i][j];
+            }
+            double average = sum / temps[i].length;
+            System.out.println("City " + i + " average: " + average + "°C");
+        }
+        
         
         // Close Scanner
         scanner.close();
