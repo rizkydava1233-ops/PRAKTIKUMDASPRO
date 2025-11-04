@@ -117,6 +117,7 @@ public class SistemHotelLengkap {
                 System.out.println("Kamar " + kamar + " : TERSEDIA untuk seluruh periode");
                 jumlahKamarTersedia++;
             }
+            
         }
         
         System.out.println("\nTotal kamar tersedia: " + jumlahKamarTersedia + " dari " + jumlahKamar + " kamar");
