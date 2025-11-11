@@ -2,7 +2,8 @@ package jobsheet10;
 
 public class Bioskop07 {
     public static void main(String[] args) {
-         String[][] penonton = new String[4][2];
+        String[][] penonton = new String[4][2];
+
         penonton[0][0] = "Amin";
         penonton[0][1] = "Bena";
         penonton[1][0] = "Candra";
@@ -22,14 +23,13 @@ public class Bioskop07 {
        // Menggunakan foreach loop untuk menampilkan panjang setiap baris
         for (String[] barisPenonton : penonton) {
             System.out.println("Panjang baris: " + barisPenonton.length);
+
+            // Menampilkan nama penonton pada baris ke-3 menggunakan for loop
+            System.out.println("\nPenonton pada baris ke-3:");
+            for (int i = 0; i < penonton[2].length; i++) {
+            System.out.println("Penonton ke-" + (i+1) + ": " + penonton[2][i]);
         }
 
-
-
-
-
-
-    }
-        
-    
+    }   
+  }
 }
