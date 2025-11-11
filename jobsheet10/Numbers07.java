@@ -22,7 +22,7 @@ public class Numbers07 {
         // Tampilkan isi array menggunakan Arrays.toString()
         System.out.println("\nIsi array myNumbers:");
         for (int i = 0; i < myNumbers.length; i++) {
-            System.out.println("Baris ke-" + (i+1) + ": " + Arrays.toString(myNumbers[i]));
+            System.out.println("Baris ke-" + (i+1) + ": " +myNumbers[i].length);
         }
    
     }
