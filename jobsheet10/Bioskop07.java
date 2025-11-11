@@ -29,7 +29,11 @@ public class Bioskop07 {
         for (String namaPenonton : penonton[2]) {
             System.out.println(namaPenonton);
         }
-
+         // Menampilkan semua penonton per baris menggunakan String.join()
+        System.out.println("\nDaftar semua penonton per baris:");
+        for (int i = 0; i < penonton.length; i++) {
+            System.out.println("Penonton pada baris ke-" + (i+1) + ": " + String.join(", ", penonton[i]));
+        }
     }   
   }
 }
