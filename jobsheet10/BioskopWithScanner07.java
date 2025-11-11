@@ -6,7 +6,7 @@ public class BioskopWithScanner07 {
         public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-                String[][] penonton = new String[4][2];
+        String[][] penonton = new String[4][2];
         String nama, next;
         int baris, kolom, menu;
         
@@ -25,23 +25,31 @@ public class BioskopWithScanner07 {
                     System.out.print("Masukkan nama: ");
                     nama = sc.nextLine();
                     
-                    System.out.print("Masukkan baris: ");
-                    baris = sc.nextInt();
+                    boolean berhasilInput = false;
                     
-                    System.out.print("Masukkan kolom: ");
-                    kolom = sc.nextInt();
-                    sc.nextLine(); // Clear buffer
-                    
-                    // Validasi baris dan kolom
-                    if (baris < 1 || baris > 4) {
-                        System.out.println("Nomor baris tidak tersedia! Baris yang tersedia: 1-4");
-                    } else if (kolom < 1 || kolom > 2) {
-                        System.out.println("Nomor kolom tidak tersedia! Kolom yang tersedia: 1-2");
-                    } else if (penonton[baris-1][kolom-1] != null) {
-                        System.out.println("Kursi sudah terisi oleh " + penonton[baris-1][kolom-1] + "! Silakan pilih kursi lain.");
-                    } else {
-                        penonton[baris-1][kolom-1] = nama;
-                        System.out.println("Data penonton berhasil disimpan!");
+                    while (!berhasilInput) {
+                        System.out.print("Masukkan baris: ");
+                        baris = sc.nextInt();
+                        
+                        System.out.print("Masukkan kolom: ");
+                        kolom = sc.nextInt();
+                        sc.nextLine(); // Clear buffer
+                        
+                        // Validasi baris dan kolom
+                        if (baris < 1 || baris > 4) {
+                            System.out.println("Nomor baris tidak tersedia! Baris yang tersedia: 1-4");
+                            System.out.println("Silakan masukkan baris dan kolom kembali.");
+                        } else if (kolom < 1 || kolom > 2) {
+                            System.out.println("Nomor kolom tidak tersedia! Kolom yang tersedia: 1-2");
+                            System.out.println("Silakan masukkan baris dan kolom kembali.");
+                        } else if (penonton[baris-1][kolom-1] != null) {
+                            System.out.println("WARNING: Kursi sudah terisi oleh " + penonton[baris-1][kolom-1] + "!");
+                            System.out.println("Silakan masukkan baris dan kolom kembali.");
+                        } else {
+                            penonton[baris-1][kolom-1] = nama;
+                            System.out.println("Data penonton berhasil disimpan!");
+                            berhasilInput = true;
+                        }
                     }
                     
                     System.out.print("Input penonton lainnya? (y/n): ");
@@ -82,6 +90,8 @@ public class BioskopWithScanner07 {
         }
         
         sc.close();
+
+
         
 
 
