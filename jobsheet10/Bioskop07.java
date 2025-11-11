@@ -24,10 +24,10 @@ public class Bioskop07 {
         for (String[] barisPenonton : penonton) {
             System.out.println("Panjang baris: " + barisPenonton.length);
 
-            // Menampilkan nama penonton pada baris ke-3 menggunakan for loop
-            System.out.println("\nPenonton pada baris ke-3:");
-            for (int i = 0; i < penonton[2].length; i++) {
-            System.out.println("Penonton ke-" + (i+1) + ": " + penonton[2][i]);
+        // Menampilkan nama penonton pada baris ke-3 menggunakan foreach loop
+        System.out.println("\nPenonton pada baris ke-3:");
+        for (String namaPenonton : penonton[2]) {
+            System.out.println(namaPenonton);
         }
 
     }   
