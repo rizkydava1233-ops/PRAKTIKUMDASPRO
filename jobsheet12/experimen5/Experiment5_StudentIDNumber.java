@@ -1,4 +1,4 @@
-package jpbsheet12.experimen5;
+package jobsheet12.experimen5;
 
 public class Experiment5_StudentIDNumber {
      static void show(String str, int... a) {

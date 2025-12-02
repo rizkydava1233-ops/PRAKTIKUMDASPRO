@@ -1,4 +1,4 @@
-package jpbsheet12.experimen3;
+package jobsheet12.experimen3;
 import java.util.Scanner;
 
 

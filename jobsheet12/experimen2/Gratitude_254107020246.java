@@ -1,4 +1,4 @@
-package jpbsheet12.experimen2;
+package jobsheet12.experimen2;
 
 public class Gratitude_254107020246 {
      public static void sayAdditionalGreetings(String greeting) {

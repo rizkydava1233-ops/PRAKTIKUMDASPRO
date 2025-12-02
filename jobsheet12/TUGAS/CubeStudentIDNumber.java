@@ -1,4 +1,4 @@
-package jpbsheet12.TUGAS;
+package jobsheet12.TUGAS;
 import java.util.Scanner;
 
 public class CubeStudentIDNumber {
