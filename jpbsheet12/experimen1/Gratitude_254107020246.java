@@ -1,4 +1,4 @@
-package jpbsheet12;
+package jpbsheet12.experimen1;
 
 public class Gratitude_254107020246 {
      public static void main(String[] args) {
