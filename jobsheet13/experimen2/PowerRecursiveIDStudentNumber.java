@@ -4,11 +4,13 @@ import java.util.Scanner;
 
 public class PowerRecursiveIDStudentNumber {
 
-    // Recursive function to calculate power
+    // Modified recursive function to calculate power and print the series
     static int calculatePower(int base, int pow) {
         if (pow == 0) {
+            System.out.print("1");
             return 1;
         } else {
+            System.out.print(base + "x");
             return base * calculatePower(base, pow - 1);
         }
     }
@@ -23,8 +25,9 @@ public class PowerRecursiveIDStudentNumber {
         System.out.print("Input Power Number: ");
         int power = input.nextInt();
         
+        System.out.print("Calculation series: ");
         int result = calculatePower(base, power);
-        System.out.println("Result of " + base + " power " + power + " = " + result);
+        System.out.println(" = " + result);
         
         input.close();
     }
