@@ -4,30 +4,13 @@ package jobsheet14;
 // NIM  : 254107020246
 // Class: Ti/1i
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
-// Class untuk menyimpan data mahasiswa
-class Mahasiswa {
-    String nama;
-    String nim;
-    double ipk;
-    String jenisBeasiswa;
-    int penghasilanOrtu;
-    
-    // Constructor
-    Mahasiswa(String nama, String nim, double ipk, String jenisBeasiswa, int penghasilanOrtu) {
-        this.nama = nama;
-        this.nim = nim;
-        this.ipk = ipk;
-        this.jenisBeasiswa = jenisBeasiswa;
-        this.penghasilanOrtu = penghasilanOrtu;
-    }
-}
-
 public class SistemBeasiswa {
-    // ArrayList untuk menyimpan data mahasiswa
-    static ArrayList<Mahasiswa> dataMhs = new ArrayList<>();
+    // Array 2D untuk menyimpan data mahasiswa
+    // Kolom: [0]=Nama, [1]=NIM, [2]=IPK, [3]=JenisBeasiswa, [4]=PenghasilanOrtu
+    static String[][] dataMhs = new String[100][5]; // Maksimal 100 mahasiswa
+    static int jumlahData = 0; // Counter jumlah data yang sudah diisi
     static Scanner sc = new Scanner(System.in);
     
     public static void main(String[] args) {
@@ -62,6 +45,11 @@ public class SistemBeasiswa {
     
     // Fungsi untuk menambah data pendaftar
     static void tambahData() {
+        if(jumlahData >= 100) {
+            System.out.println("Data sudah penuh!");
+            return;
+        }
+        
         System.out.println("\n--- Tambah Data Pendaftar ---");
         
         // Input nama
@@ -115,18 +103,23 @@ public class SistemBeasiswa {
             }
         }
         
-        // Untuk buat objek mahasiswa dan ditambahkan ke ArrayList
-        Mahasiswa m = new Mahasiswa(nama, nim, ipk, jenis, gaji);
-        dataMhs.add(m);
+        // Simpan data ke array 2D
+        dataMhs[jumlahData][0] = nama;
+        dataMhs[jumlahData][1] = nim;
+        dataMhs[jumlahData][2] = String.valueOf(ipk);
+        dataMhs[jumlahData][3] = jenis;
+        dataMhs[jumlahData][4] = String.valueOf(gaji);
+        
+        jumlahData++;
         System.out.println("Data berhasil ditambahkan!");
     }
     
-    // Fungsi untuk menampilkan semua data
+    // Fungsi untuk menampilkan semua data (DENGAN NESTED LOOP)
     static void tampilData() {
         System.out.println("\n--- Daftar Pendaftar Beasiswa ---");
         
         // Cek apakah ada data
-        if(dataMhs.size() == 0) {
+        if(jumlahData == 0) {
             System.out.println("Belum ada data");
             return;
         }
@@ -137,20 +130,35 @@ public class SistemBeasiswa {
             "No", "Nama", "NIM", "IPK", "Jenis", "Penghasilan");
         System.out.println("=======================================================================================");
         
-        // Loop untuk menampilkan data
-        for(int i = 0; i < dataMhs.size(); i++) {
-            Mahasiswa m = dataMhs.get(i);
-            System.out.printf("%-4d %-25s %-15s %-6.2f %-12s Rp%-13d\n",
-                (i+1), m.nama, m.nim, m.ipk, m.jenisBeasiswa, m.penghasilanOrtu);
+        // NESTED LOOP untuk menampilkan data
+        // Loop outer: iterasi setiap baris (mahasiswa)
+        for(int i = 0; i < jumlahData; i++) {
+            System.out.printf("%-4d ", (i+1));
+            
+            // Loop inner: iterasi setiap kolom (atribut mahasiswa)
+            for(int j = 0; j < 5; j++) {
+                if(j == 0) {
+                    System.out.printf("%-25s ", dataMhs[i][j]); // Nama
+                } else if(j == 1) {
+                    System.out.printf("%-15s ", dataMhs[i][j]); // NIM
+                } else if(j == 2) {
+                    System.out.printf("%-6s ", dataMhs[i][j]);  // IPK
+                } else if(j == 3) {
+                    System.out.printf("%-12s ", dataMhs[i][j]); // Jenis
+                } else if(j == 4) {
+                    System.out.printf("Rp%-13s", dataMhs[i][j]); // Penghasilan
+                }
+            }
+            System.out.println(); // Pindah baris setelah selesai 1 mahasiswa
         }
         System.out.println("=======================================================================================");
     }
     
-    // Fungsi untuk mencari data berdasarkan jenis beasiswa
+    // Fungsi untuk mencari data berdasarkan jenis beasiswa (DENGAN NESTED LOOP)
     static void cariData() {
         System.out.println("\n--- Cari Data Berdasarkan Jenis Beasiswa ---");
         
-        if(dataMhs.size() == 0) {
+        if(jumlahData == 0) {
             System.out.println("Belum ada data");
             return;
         }
@@ -165,14 +173,31 @@ public class SistemBeasiswa {
             "No", "Nama", "NIM", "IPK", "Jenis", "Penghasilan");
         System.out.println("=======================================================================================");
         
-        // Loop untuk mencari dan menampilkan data
+        // NESTED LOOP untuk mencari dan menampilkan data
         int no = 1;
         int ketemu = 0;
-        for(int i = 0; i < dataMhs.size(); i++) {
-            Mahasiswa m = dataMhs.get(i);
-            if(m.jenisBeasiswa.equals(cari)) {
-                System.out.printf("%-4d %-25s %-15s %-6.2f %-12s Rp%-13d\n",
-                    no, m.nama, m.nim, m.ipk, m.jenisBeasiswa, m.penghasilanOrtu);
+        
+        // Loop outer: iterasi setiap baris (mahasiswa)
+        for(int i = 0; i < jumlahData; i++) {
+            // Cek apakah jenis beasiswa sesuai
+            if(dataMhs[i][3].equals(cari)) {
+                System.out.printf("%-4d ", no);
+                
+                // Loop inner: iterasi setiap kolom untuk mahasiswa yang cocok
+                for(int j = 0; j < 5; j++) {
+                    if(j == 0) {
+                        System.out.printf("%-25s ", dataMhs[i][j]);
+                    } else if(j == 1) {
+                        System.out.printf("%-15s ", dataMhs[i][j]);
+                    } else if(j == 2) {
+                        System.out.printf("%-6s ", dataMhs[i][j]);
+                    } else if(j == 3) {
+                        System.out.printf("%-12s ", dataMhs[i][j]);
+                    } else if(j == 4) {
+                        System.out.printf("Rp%-13s", dataMhs[i][j]);
+                    }
+                }
+                System.out.println();
                 no++;
                 ketemu++;
             }
@@ -184,53 +209,41 @@ public class SistemBeasiswa {
         System.out.println("=======================================================================================");
     }
     
-    // Fungsi untuk menghitung rata-rata IPK per jenis beasiswa
+    // Fungsi untuk menghitung rata-rata IPK per jenis beasiswa (DENGAN NESTED LOOP)
     static void hitungRataIPK() {
         System.out.println("\n--- Rata-rata IPK per Jenis Beasiswa ---");
         
-        if(dataMhs.size() == 0) {
+        if(jumlahData == 0) {
             System.out.println("Belum ada data");
             return;
         }
         
-        // Variabel untuk menghitung total dan jumlah
-        double totalReguler = 0, totalUnggulan = 0, totalRiset = 0;
-        int jmlReguler = 0, jmlUnggulan = 0, jmlRiset = 0;
+        // Array untuk jenis-jenis beasiswa
+        String[] jenisBeasiswa = {"REGULER", "UNGGULAN", "RISET"};
         
-        // Loop untuk menghitung total IPK per jenis
-        for(int i = 0; i < dataMhs.size(); i++) {
-            Mahasiswa m = dataMhs.get(i);
-            
-            if(m.jenisBeasiswa.equals("REGULER")) {
-                totalReguler += m.ipk;
-                jmlReguler++;
-            } else if(m.jenisBeasiswa.equals("UNGGULAN")) {
-                totalUnggulan += m.ipk;
-                jmlUnggulan++;
-            } else if(m.jenisBeasiswa.equals("RISET")) {
-                totalRiset += m.ipk;
-                jmlRiset++;
-            }
-        }
-        
-        // Tampilkan hasil perhitungan
         System.out.println("=========================================");
-        if(jmlReguler > 0) {
-            System.out.printf("Reguler  : %.2f\n", totalReguler/jmlReguler);
-        } else {
-            System.out.println("Reguler  : tidak ada data");
-        }
         
-        if(jmlUnggulan > 0) {
-            System.out.printf("Unggulan : %.2f\n", totalUnggulan/jmlUnggulan);
-        } else {
-            System.out.println("Unggulan : tidak ada data");
-        }
-        
-        if(jmlRiset > 0) {
-            System.out.printf("Riset    : %.2f\n", totalRiset/jmlRiset);
-        } else {
-            System.out.println("Riset    : tidak ada data");
+        // NESTED LOOP untuk menghitung rata-rata per jenis
+        // Loop outer: iterasi setiap jenis beasiswa
+        for(int i = 0; i < jenisBeasiswa.length; i++) {
+            double total = 0;
+            int jumlah = 0;
+            
+            // Loop inner: iterasi semua mahasiswa untuk hitung yang sesuai jenis
+            for(int j = 0; j < jumlahData; j++) {
+                if(dataMhs[j][3].equals(jenisBeasiswa[i])) {
+                    total += Double.parseDouble(dataMhs[j][2]);
+                    jumlah++;
+                }
+            }
+            
+            // Tampilkan hasil
+            if(jumlah > 0) {
+                System.out.printf("%-9s: %.2f (dari %d mahasiswa)\n", 
+                    jenisBeasiswa[i], total/jumlah, jumlah);
+            } else {
+                System.out.printf("%-9s: tidak ada data\n", jenisBeasiswa[i]);
+            }
         }
         System.out.println("=========================================");
     }
