@@ -27,7 +27,7 @@ public class SistemBeasiswa {
             System.out.println("4. Hitung Rata-rata IPK per Jenis Beasiswa");
             System.out.println("5. Keluar");
             System.out.println("========================================");
-            System.out.print("Pilihan: ");
+            System.out.print("PILIH MENU 1-5: ");
             pilih = sc.nextInt();
             sc.nextLine();
             
