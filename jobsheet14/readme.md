@@ -1,204 +1,248 @@
-# PENJELASAN PROGRAM SISTEM PENDAFTARAN BEASISWA
+ MENU 1: TAMBAH DATA
+🔹 1. INPUT
+java// Input nama
+System.out.print("Nama Mahasiswa: ");
+String nama = sc.nextLine();
 
-## 1. STRUKTUR PROGRAM
+// Input NIM
+System.out.print("NIM: ");
+String nim = sc.nextLine();
+Penjelasan: User memasukkan data nama dan NIM dari keyboard.
 
-### Class Mahasiswa
-- **Fungsi**: Menyimpan data setiap pendaftar beasiswa
-- **Atribut yang disimpan**:
-  - `nama` - nama lengkap mahasiswa
-  - `nim` - nomor induk mahasiswa
-  - `ipk` - IPK terakhir mahasiswa
-  - `jenisBeasiswa` - jenis beasiswa yang didaftar
-  - `penghasilanOrtu` - penghasilan orang tua
-- **Constructor**: Digunakan untuk membuat objek mahasiswa baru dengan langsung mengisi semua atribut
-
-### Class SistemBeasiswa
-- **Fungsi**: Class utama yang menjalankan seluruh sistem
-- **Komponen penting**:
-  - `ArrayList<Mahasiswa> dataMhs` - untuk menyimpan semua data pendaftar secara dinamis
-  - `Scanner sc` - untuk menerima input dari user
-  - Fungsi-fungsi untuk setiap menu
-
----
-
-## 2. IMPLEMENTASI FITUR (Sesuai Soal)
-
-### Menu 1: Tambah Data Pendaftar (`tambahData()`)
-**Alur kerja**:
-1. Input nama mahasiswa
-2. Input NIM
-3. Input IPK dengan validasi (0-4.0)
-4. Input jenis beasiswa dengan validasi (hanya Reguler/Unggulan/Riset)
-5. Input penghasilan orang tua dengan validasi (maksimal Rp 2.000.000)
-6. Buat objek Mahasiswa baru
-7. Simpan ke ArrayList
-
-**Validasi yang diterapkan**:
-- IPK harus dalam rentang 0-4.0
-- Jenis beasiswa hanya boleh: REGULER, UNGGULAN, atau RISET
-- Penghasilan orang tua maksimal Rp 2.000.000
-
-### Menu 2: Tampilkan Semua Pendaftar (`tampilData()`)
-**Alur kerja**:
-1. Cek apakah ArrayList kosong
-2. Jika ada data, tampilkan header tabel
-3. Loop semua data di ArrayList
-4. Tampilkan setiap data dalam format tabel yang rapi
-
-**Output**: Tabel berisi nomor, nama, NIM, IPK, jenis beasiswa, dan penghasilan orang tua
-
-### Menu 3: Cari berdasarkan Jenis Beasiswa (`cariData()`)
-**Alur kerja**:
-1. Input jenis beasiswa yang ingin dicari
-2. Ubah input ke huruf kapital (uppercase)
-3. Loop semua data di ArrayList
-4. Bandingkan jenis beasiswa dengan input user
-5. Tampilkan data yang cocok dalam format tabel
-
-**Logika pencarian**: Menggunakan `equals()` untuk membandingkan string
-
-### Menu 4: Hitung Rata-rata IPK (`hitungRataIPK()`)
-**Alur kerja**:
-1. Siapkan variabel untuk menampung total IPK dan jumlah mahasiswa per jenis
-2. Loop semua data di ArrayList
-3. Kelompokkan berdasarkan jenis beasiswa
-4. Jumlahkan IPK dan hitung jumlah mahasiswa per jenis
-5. Hitung rata-rata: total IPK / jumlah mahasiswa
-6. Tampilkan hasil untuk setiap jenis beasiswa
-
-**Rumus**: Rata-rata = Total IPK / Jumlah Mahasiswa
-
----
-
-## 3. KONSEP PEMROGRAMAN YANG DIGUNAKAN
-
-### A. Pemilihan (Selection)
-**Implementasi**:
-- `if-else` untuk validasi input (IPK, jenis beasiswa, penghasilan)
-- `switch-case` untuk memilih menu yang dipilih user
-
-**Contoh**:
-```java
-if(ipk >= 0 && ipk <= 4.0) {
-    valid = true;
-} else {
-    System.out.println("IPK harus 0-4!");
-}
-```
-
-### B. Perulangan (Looping)
-**Implementasi**:
-- `while` untuk validasi input sampai data benar
-- `for` untuk menampilkan semua data
-- `for` untuk mencari data
-- `for` untuk menghitung rata-rata
-- `do-while` untuk menu utama
-
-**Contoh**:
-```java
-// While untuk validasi
+🔹 2. VALIDASI
+A. Validasi IPK:
+javadouble ipk = 0;
+boolean valid = false;
 while(!valid) {
-    // input dan validasi
+    System.out.print("IPK: ");
+    ipk = sc.nextDouble();
+    if(ipk >= 0 && ipk <= 4.0) {
+        valid = true;  // ✅ Data valid
+    } else {
+        System.out.println("IPK harus 0-4!");  // ❌ Data salah, ulangi
+    }
 }
+Penjelasan: Loop terus sampai IPK antara 0-4.
+B. Validasi Jenis Beasiswa:
+javaString jenis = "";
+valid = false;
+while(!valid) {
+    System.out.print("Jenis Beasiswa (Reguler/Unggulan/Riset): ");
+    jenis = sc.nextLine().toUpperCase();
+    
+    if(jenis.equals("REGULER") || jenis.equals("UNGGULAN") || jenis.equals("RISET")) {
+        valid = true;  // ✅ Data valid
+    } else {
+        System.out.println("Jenis beasiswa tidak valid!");  // ❌ Data salah
+    }
+}
+Penjelasan: Loop sampai input salah satu dari 3 jenis beasiswa.
+C. Validasi Penghasilan:
+javaint gaji = 0;
+valid = false;
+while(!valid) {
+    System.out.print("Penghasilan Orang Tua (maks 2000000): ");
+    gaji = sc.nextInt();
+    sc.nextLine();
+    
+    if(gaji <= 2000000 && gaji >= 0) {
+        valid = true;  // ✅ Data valid
+    } else {
+        System.out.println("Penghasilan melebihi batas!");  // ❌ Data salah
+    }
+}
+Penjelasan: Loop sampai penghasilan maksimal 2 juta.
 
-// For untuk menampilkan data
-for(int i = 0; i < dataMhs.size(); i++) {
-    // tampilkan data
+🔹 3. SIMPAN
+java// Simpan data ke array 2D
+dataMhs[jumlahData][0] = nama;                    // Kolom 0: Nama
+dataMhs[jumlahData][1] = nim;                     // Kolom 1: NIM
+dataMhs[jumlahData][2] = String.valueOf(ipk);     // Kolom 2: IPK
+dataMhs[jumlahData][3] = jenis;                   // Kolom 3: Jenis
+dataMhs[jumlahData][4] = String.valueOf(gaji);    // Kolom 4: Penghasilan
+
+jumlahData++;  // Tambah counter
+System.out.println("Data berhasil ditambahkan!");
+Penjelasan: Semua data yang sudah valid disimpan ke array 2D.
+
+📋 MENU 2: TAMPILKAN SEMUA DATA
+🔹 4. PROSES (Ambil Data dari Array)
+java// NESTED LOOP untuk menampilkan data
+// Loop outer: iterasi setiap baris (mahasiswa)
+for(int i = 0; i < jumlahData; i++) {
+    System.out.printf("%-4d ", (i+1));
+    
+    // Loop inner: iterasi setiap kolom (atribut mahasiswa)
+    for(int j = 0; j < 5; j++) {
+        if(j == 0) {
+            System.out.printf("%-25s ", dataMhs[i][j]); // Nama
+        } else if(j == 1) {
+            System.out.printf("%-15s ", dataMhs[i][j]); // NIM
+        } else if(j == 2) {
+            System.out.printf("%-6s ", dataMhs[i][j]);  // IPK
+        } else if(j == 3) {
+            System.out.printf("%-12s ", dataMhs[i][j]); // Jenis
+        } else if(j == 4) {
+            System.out.printf("Rp%-13s", dataMhs[i][j]); // Penghasilan
+        }
+    }
+    System.out.println();
+}
+```
+**Penjelasan Proses:**
+- **Loop luar (i):** Ambil mahasiswa satu per satu
+- **Loop dalam (j):** Ambil setiap data mahasiswa (5 kolom)
+
+**Visualisasi:**
+```
+i=0 → ambil dataMhs[0][0], [0][1], [0][2], [0][3], [0][4]
+i=1 → ambil dataMhs[1][0], [1][1], [1][2], [1][3], [1][4]
+i=2 → ambil dataMhs[2][0], [2][1], [2][2], [2][3], [2][4]
+
+🔹 5. TAMPILKAN
+javaSystem.out.println("=======================================================================================");
+System.out.printf("%-4s %-25s %-15s %-6s %-12s %-15s\n", 
+    "No", "Nama", "NIM", "IPK", "Jenis", "Penghasilan");
+System.out.println("=======================================================================================");
+
+// (hasil dari nested loop di atas)
+
+System.out.println("=======================================================================================");
+```
+**Output:**
+```
+No   Nama                      NIM            IPK    Jenis        Penghasilan
+1    Budi                      123            3.5    REGULER      Rp1500000
+2    Ani                       124            3.8    UNGGULAN     Rp1800000
+
+📋 MENU 3: CARI DATA BERDASARKAN JENIS
+🔹 1. INPUT
+javaSystem.out.print("Masukkan jenis beasiswa: ");
+String cari = sc.nextLine().toUpperCase();
+Penjelasan: User input jenis beasiswa yang mau dicari.
+
+🔹 4. PROSES (Filter Data)
+javaint no = 1;
+int ketemu = 0;
+
+// Loop outer: iterasi setiap baris (mahasiswa)
+for(int i = 0; i < jumlahData; i++) {
+    // Cek apakah jenis beasiswa sesuai
+    if(dataMhs[i][3].equals(cari)) {  // FILTER
+        System.out.printf("%-4d ", no);
+        
+        // Loop inner: iterasi setiap kolom untuk mahasiswa yang cocok
+        for(int j = 0; j < 5; j++) {
+            if(j == 0) {
+                System.out.printf("%-25s ", dataMhs[i][j]);
+            } else if(j == 1) {
+                System.out.printf("%-15s ", dataMhs[i][j]);
+            } else if(j == 2) {
+                System.out.printf("%-6s ", dataMhs[i][j]);
+            } else if(j == 3) {
+                System.out.printf("%-12s ", dataMhs[i][j]);
+            } else if(j == 4) {
+                System.out.printf("Rp%-13s", dataMhs[i][j]);
+            }
+        }
+        System.out.println();
+        no++;
+        ketemu++;
+    }
+}
+```
+**Penjelasan Proses:**
+- **Loop luar (i):** Cek setiap mahasiswa
+- **IF:** Filter hanya yang jenis beasiswanya cocok
+- **Loop dalam (j):** Cetak data mahasiswa yang cocok
+
+**Visualisasi (cari "UNGGULAN"):**
+```
+i=0: dataMhs[0][3]="REGULER"  → SKIP (tidak cocok)
+i=1: dataMhs[1][3]="UNGGULAN" → PROSES (cocok!) → cetak semua kolom
+i=2: dataMhs[2][3]="RISET"    → SKIP (tidak cocok)
+i=3: dataMhs[3][3]="UNGGULAN" → PROSES (cocok!) → cetak semua kolom
+
+🔹 5. TAMPILKAN
+javaif(ketemu == 0) {
+    System.out.println("Data tidak ditemukan");
+}
+```
+**Output (jika ada):**
+```
+Hasil Pencarian:
+No   Nama                      NIM            IPK    Jenis        Penghasilan
+1    Ani                       124            3.8    UNGGULAN     Rp1800000
+2    Dedi                      126            3.7    UNGGULAN     Rp1600000
+```
+
+**Output (jika tidak ada):**
+```
+Data tidak ditemukan
+
+📋 MENU 4: HITUNG RATA-RATA IPK
+🔹 4. PROSES (Hitung Rata-rata)
+javaString[] jenisBeasiswa = {"REGULER", "UNGGULAN", "RISET"};
+
+// Loop outer: iterasi setiap jenis beasiswa
+for(int i = 0; i < jenisBeasiswa.length; i++) {
+    double total = 0;
+    int jumlah = 0;
+    
+    // Loop inner: iterasi semua mahasiswa untuk hitung yang sesuai jenis
+    for(int j = 0; j < jumlahData; j++) {
+        if(dataMhs[j][3].equals(jenisBeasiswa[i])) {  // FILTER
+            total += Double.parseDouble(dataMhs[j][2]);  // Jumlahkan IPK
+            jumlah++;  // Hitung berapa mahasiswa
+        }
+    }
+    
+    // Hitung rata-rata
+    if(jumlah > 0) {
+        double rataRata = total / jumlah;
+        // (tampilkan di bagian 5)
+    }
 }
 ```
 
-### C. Array (ArrayList)
-**Implementasi**:
-- `ArrayList<Mahasiswa>` untuk menyimpan data secara dinamis
-- Ukuran ArrayList bisa bertambah otomatis
-- Menggunakan method `add()`, `get()`, `size()`
+**Penjelasan Proses:**
 
-**Keuntungan ArrayList**:
-- Tidak perlu tentukan ukuran di awal
-- Bisa tambah data kapan saja
-- Ukuran fleksibel
+**Iterasi 1 (i=0, proses "REGULER"):**
+```
+j=0: dataMhs[0][3]="REGULER"  → total=0+3.5=3.5, jumlah=1
+j=1: dataMhs[1][3]="UNGGULAN" → SKIP
+j=2: dataMhs[2][3]="REGULER"  → total=3.5+3.6=7.1, jumlah=2
+j=3: dataMhs[3][3]="RISET"    → SKIP
 
-### D. Fungsi/Method
-**Implementasi**:
-Setiap fitur dibuat sebagai fungsi terpisah:
-- `tambahData()` - untuk menu 1
-- `tampilData()` - untuk menu 2
-- `cariData()` - untuk menu 3
-- `hitungRataIPK()` - untuk menu 4
-
-**Keuntungan**:
-- Kode lebih rapi dan terorganisir
-- Mudah dipahami dan di-maintain
-- Fungsi bisa dipanggil berkali-kali
-
-### E. Object-Oriented Programming (OOP)
-**Implementasi**:
-- Class `Mahasiswa` sebagai blueprint untuk objek mahasiswa
-- Constructor untuk inisialisasi objek
-- Penggunaan objek untuk menyimpan data yang kompleks
-
----
-
-## 4. CARA KERJA PROGRAM
-
-### Flow Program:
-1. Program dimulai dari `main()`
-2. Tampilkan menu utama (do-while loop)
-3. User memilih menu (1-5)
-4. Switch-case memanggil fungsi sesuai pilihan
-5. Fungsi dijalankan
-6. Kembali ke menu utama
-7. Loop terus sampai user pilih keluar (5)
-
-### Contoh Skenario Penggunaan:
-1. User pilih menu 1 → tambah 3 data mahasiswa
-2. User pilih menu 2 → lihat semua data (3 data tampil)
-3. User pilih menu 3 → cari beasiswa "Unggulan"
-4. User pilih menu 4 → lihat rata-rata IPK per jenis
-5. User pilih menu 5 → program selesai
-
----
-
-## 5. KEUNGGULAN PROGRAM
-
-✓ **Validasi lengkap** - mencegah input yang salah
-✓ **Modular** - setiap fitur adalah fungsi terpisah
-✓ **Dinamis** - data bisa bertambah tanpa batas
-✓ **User-friendly** - menu mudah dipahami
-✓ **Format rapi** - output dalam bentuk tabel
-✓ **Efisien** - menggunakan ArrayList untuk data dinamis
-
----
-
-## 6. PENERAPAN MATERI PRAKTIKUM
-
-| Materi | Penerapan di Program |
-|--------|---------------------|
-| **Pemilihan** | (if-else) Validasi input, (switch-case) switch menu |
-| **Perulangan** | While untuk validasi, for untuk data |
-| **Array** | ArrayList untuk simpan data dinamis |
-| **Fungsi** | 4 fungsi untuk 4 menu |
-| **OOP** | Class Mahasiswa sebagai objek |
-
----
-
-## 7. CARA COMPILE DAN RUN
-
-```bash
-# Compile
-javac SistemBeasiswa.java
-
-# Jalankan
-java SistemBeasiswa
+Hasil: total=7.1, jumlah=2
+Rata-rata = 7.1 / 2 = 3.55
 ```
 
----
+**Iterasi 2 (i=1, proses "UNGGULAN"):**
+```
+Reset: total=0, jumlah=0
+Loop lagi untuk cari semua UNGGULAN
+Hitung rata-rata UNGGULAN
+```
 
-## KESIMPULAN
+**Iterasi 3 (i=2, proses "RISET"):**
+```
+Reset: total=0, jumlah=0
+Loop lagi untuk cari semua RISET
+Hitung rata-rata RISET
 
-Program ini berhasil mengimplementasikan:
-- Semua fitur yang diminta dalam soal
-- Validasi input sesuai ketentuan
-- Struktur kode yang modular dan terorganisir
-- Penerapan konsep pemrograman: pemilihan, perulangan, array, dan fungsi
-- Output yang rapi dan informatif
+🔹 5. TAMPILKAN
+javaif(jumlah > 0) {
+    System.out.printf("%-9s: %.2f (dari %d mahasiswa)\n", 
+        jenisBeasiswa[i], total/jumlah, jumlah);
+} else {
+    System.out.printf("%-9s: tidak ada data\n", jenisBeasiswa[i]);
+}
+```
+**Output:**
+```
+=========================================
+REGULER  : 3.55 (dari 2 mahasiswa)
+UNGGULAN : 3.75 (dari 3 mahasiswa)
+RISET    : 3.80 (dari 1 mahasiswa)
+=========================================
